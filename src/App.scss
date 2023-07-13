@@ -1,0 +1,452 @@
+@use "sass:math";
+
+.page {
+	position: absolute;
+	left: 50%;
+	top: 20%;
+	transform: translate(-50%, -20%);
+	width: 1280px;
+	height: 720px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-color: transparent;
+	font-family: sans-serif;
+
+	.header {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 1280px;
+		height: 50px;
+		background-color: #000;
+	}
+
+	.sidebar {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100px;
+		height: 720px;
+		background-color: rgba(0, 0, 0, 0.7);
+	}
+
+	.footer {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		background-color: #000;
+		width: 1280px;
+		height: 30px;
+	}
+
+	.bonus-wheel {
+		position: absolute;
+		left: 770px;
+		top: 50px;
+		width: 400px;
+		height: 176px;
+		background-image: url("assets/Bonuswheel-Title-L.png");
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-color: transparent;
+	}
+
+	.wheel-type {
+		position: absolute;
+		top: 180px;
+		left: 810px;
+		width: 320px;
+		height: 80px;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-color: transparent;
+	}
+}
+
+.wheel-container {
+	position: absolute;
+	left: 200px;
+	top: 105px;
+	width: 520px;
+	height: 520px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-size: cover;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	border-radius: 50%;
+
+
+	.pointer {
+		position: absolute;
+		left: 50%;
+		top: -8px;
+		transform: translateX(-50%);
+		width: 72px;
+		height: 80px;
+		background-size: cover;
+		background-color: transparent;
+		background-repeat: no-repeat;
+	}
+
+	.wheel {
+		position: relative;
+		width: 450px;
+		height: 450px;
+		border-radius: 50%;
+		background-size: cover;
+		background-color: transparent;
+		background-repeat: no-repeat;
+		transform-origin: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		//transition: transform 5s cubic-bezier(0, 0, 0.18, 1);
+		transition: transform 5s ease-out;
+
+		&.my-animation {
+			animation: wheel-blur 5s;
+
+			@keyframes wheel-blur {
+				0% {
+					filter: blur(1.5px);
+				}
+				50% {
+					filter: blur(1.5px);
+				}
+				100% {
+					filter: blur(0px);
+				}
+			}
+		}
+
+		&.loading {
+			filter: blur(1.5px);
+			animation: infinitySpin 0.5s linear infinite;
+
+			@keyframes infinitySpin {
+				from {
+					transform: rotate(0deg);
+				}
+				to {
+					transform: rotate(360deg);
+				}
+			}
+		}
+
+		.sector {
+			position: absolute;
+			user-select: none;
+			left: 167px;
+			top: 0;
+			width: 118px;
+			height: 225px;
+			display: flex;
+			justify-content: center;
+			transform-origin: bottom center;
+			font-size: 36px;
+			letter-spacing: -2px;
+			font-weight: 500;
+			border-radius: 60px/11px;
+			clip-path: polygon(0 0, 50% 100%, 100% 0);
+
+			.text {
+				margin-top: 25px;
+				text-align: center;
+			}
+
+			&.glowing {
+				background-image: linear-gradient(to top,#BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+				animation: fade 1s infinite;
+
+				@keyframes fade {
+					0% {
+						opacity: 0.5;
+					}
+					25% {
+						opacity: 0.8;
+					}
+					50% {
+						opacity: 1;
+					}
+					75% {
+						opacity: 0.8;
+					}
+					100% {
+						opacity: 0.5;
+					}
+				}
+
+				.text {
+					width: 100%;
+					height: 100%;
+					color: #90401c;
+					animation: growing-text 1s infinite;
+
+					@keyframes growing-text {
+						0% {
+							transform: scale(1);
+							opacity: 0.5;
+						}
+						50% {
+							transform: scale(1.05);
+							opacity: 1;
+						}
+						100% {
+							transform: scale(1);
+							opacity: 0.5;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.btn-container {
+		position: absolute;
+		width: 150px;
+		height: 150px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-size: cover;
+		background-color: transparent;
+		background-repeat: no-repeat;
+
+		.btn {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			cursor: pointer;
+			border: none;
+			padding: unset;
+			background-size: cover;
+			background-color: transparent;
+			background-repeat: no-repeat;
+			background-image: url('assets/BonusWheel-start-button_begin.svg');
+			animation: glowing-button 1.5s infinite;
+
+			&:active {
+				background-image: url("assets/BonusWheel-start-button_press.svg");
+			}
+
+			&:disabled {
+				cursor: default;
+				background-image: url('assets/BonusWheel-start-button_spin.svg');
+			}
+
+			@keyframes glowing-button {
+				0% {
+					box-shadow: 0px -4px 25px 0px #fff;
+				}
+				8.33% {
+					box-shadow: 2px -4px 25px 0px #fff;
+				}
+				16.67% {
+					box-shadow: 4px -2px 25px 0px #fff;
+				}
+				25% {
+					box-shadow: 4px 0px 25px 0px #fff;
+				}
+				33.33% {
+					box-shadow: 4px 2px 25px 0px #fff;
+				}
+				41.67% {
+					box-shadow: 2px 4px 25px 0px #fff;
+				}
+				50% {
+					box-shadow: 0px 4px 25px 0px #fff;
+				}
+				58.33% {
+					box-shadow: -2px 4px 25px 0px #fff;
+				}
+				66.67% {
+					box-shadow: -4px 2px 25px 0px #fff;
+				}
+				75% {
+					box-shadow: -4px 0px 25px 0px #fff;
+				}
+				83.33% {
+					box-shadow: -4px -2px 25px 0px #fff;
+				}
+				91.67% {
+					box-shadow: -2px -4px 25px 0px #fff;
+				}
+				100% {
+					box-shadow: 0px -4px 25px 0px #fff;
+				}
+			}
+		}
+	}
+}
+
+
+$variants: (
+	'ruby': #f60f8b,
+	'sapphire': #89acff,
+	'diamond': #a2a2a2,
+);
+
+@mixin createGlowingContainerAnimation ($variant, $color) {
+	animation: glowing-#{$variant} 1s infinite;
+
+	@keyframes glowing-#{$variant} {
+		0% {
+			box-shadow: 0px -8px 15px 0px $color;
+		}
+		8.33% {
+			box-shadow: 4px -8px 15px 0px $color;
+		}
+		16.67% {
+			box-shadow: 8px -4px 15px 0px $color;
+		}
+		25% {
+			box-shadow: 8px 0px 15px 0px $color;
+		}
+		33.33% {
+			box-shadow: 8px 4px 15px 0px $color;
+		}
+		41.67% {
+			box-shadow: 4px 8px 15px 0px $color;
+		}
+		50% {
+			box-shadow: 0px 8px 15px 0px $color;
+		}
+		58.33% {
+			box-shadow: -4px 8px 15px 0px $color;
+		}
+		66.67% {
+			box-shadow: -8px 4px 15px 0px $color;
+		}
+		75% {
+			box-shadow: -8px 0px 15px 0px $color;
+		}
+		83.33% {
+			box-shadow: -8px -4px 15px 0px $color;
+		}
+		91.67% {
+			box-shadow: -4px -8px 15px 0px $color;
+		}
+		100% {
+			box-shadow: 0px -8px 15px 0px $color;
+		}
+	}
+}
+
+@mixin createVariantClasses() {
+	@each $variant, $color in $variants {
+		.#{$variant} {
+			background-image: url('assets/Bonuswheel-BG-L_#{$variant}.png');
+
+			.wheel-type {
+				background-image: url('assets/Bonuswheel-Level-L_#{$variant}.png');
+			}
+
+			.wheel-container {
+				background-image: url('assets/BonusWheel-wheel-base_#{$variant}.svg');
+				@include createGlowingContainerAnimation($variant, $color);
+
+			.pointer {
+				background-image: url('assets/BonusWheel-pointer_#{$variant}.svg');
+			}
+
+			.wheel {
+				background-image: url('assets/BonusWheel-wheel_#{$variant}-sector_all.svg');
+
+				.sector {
+					&.low {
+						@if $variant == ruby {
+							color: #fff;
+						} @else if $variant == sapphire {
+							color: #25527f;
+						} @else if $variant == diamond {
+							color: #90401c;
+						}
+					}
+					&.second {
+						@if $variant == ruby {
+							color: #90401c;
+						} @else if $variant == sapphire {
+							color: #90401c;
+						} @else if $variant == diamond {
+							color: #fff;
+						}
+					}
+					&.third {
+						@if $variant == ruby {
+							color: #fff;
+						} @else if $variant == sapphire {
+							color: #fff;
+						} @else if $variant == diamond {
+							color: #fff;
+						}
+					}
+					&.high {
+						@if $variant == ruby {
+							color: #fff;
+						} @else if $variant == sapphire {
+							color: #fff;
+						} @else if $variant == diamond {
+							color: #2c5d7f;
+						}
+					}
+				}
+			}
+
+			.btn-container {
+				background-image: url('assets/BonusWheel-start-base_#{$variant}.svg');
+			}
+		}
+	}
+}
+}
+
+@include createVariantClasses();
+
+.settings {
+	position: absolute;
+	bottom: -170px;
+	display: flex;
+	gap: 50px;
+	border: 1px solid black;
+	border-radius: 8px;
+	padding: 8px;
+	background-color: rgba(118, 124, 119, 0.1);
+
+	.box {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		font-size: 25px;
+		gap: 10px;
+	}
+
+	.variants {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+
+		.variant {
+			cursor: pointer;
+			min-width: 150px;
+			border-radius: 8px;
+			font-size: 20px;
+			font-weight: bold;
+			text-transform: capitalize;
+			user-select: none;
+			background-color: transparent;
+
+			&.active {
+				background-color: chartreuse;
+			}
+		}
+	}
+}
+
