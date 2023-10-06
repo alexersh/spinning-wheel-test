@@ -1,5 +1,5 @@
 export const DEFAULT_WHEEL_SPINS = 5;
-export const MAX_ADDITIONAL_SPINS = 0;
+export const MAX_ADDITIONAL_SPINS = 5;
 
 export const variants = ['ruby', 'sapphire', 'diamond'];
 
@@ -22,62 +22,50 @@ export const sectors = [
   {
     deg: sectorToDegreesMap['SECTOR_1'],
     resultType: 'SECTOR_1',
-    type: 'low',
   },
   {
     deg: sectorToDegreesMap['SECTOR_2'],
     resultType: 'SECTOR_2',
-    type: 'second',
   },
   {
     deg: sectorToDegreesMap['SECTOR_3'],
     resultType: 'SECTOR_3',
-    type: 'low',
   },
   {
     deg: sectorToDegreesMap['SECTOR_4'],
     resultType: 'SECTOR_4',
-    type: 'third',
   },
   {
     deg: sectorToDegreesMap['SECTOR_5'],
     resultType: 'SECTOR_5',
-    type: 'low',
   },
   {
     deg: sectorToDegreesMap['SECTOR_6'],
     resultType: 'SECTOR_6',
-    type: 'high',
   },
   {
     deg: sectorToDegreesMap['SECTOR_7'],
     resultType: 'SECTOR_7',
-    type: 'low',
   },
   {
     deg: sectorToDegreesMap['SECTOR_8'],
     resultType: 'SECTOR_8',
-    type: 'third',
   },
   {
     deg: sectorToDegreesMap['SECTOR_9'],
     resultType: 'SECTOR_9',
-    type: 'low',
   },
   {
     deg: sectorToDegreesMap['SECTOR_10'],
     resultType: 'SECTOR_10',
-    type: 'second',
   },
   {
     deg: sectorToDegreesMap['SECTOR_11'],
     resultType: 'SECTOR_11',
-    type: 'low',
   },
   {
     deg: sectorToDegreesMap['SECTOR_12'],
     resultType: 'SECTOR_12',
-    type: 'third',
   },
 ];
 
